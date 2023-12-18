@@ -8,22 +8,20 @@ import org.springframework.web.reactive.function.client.WebClient;
 public class CommunicatorService {
     public ObjectNode authenticateCardNetwork(ObjectNode objectNode){
         WebClient webClient = WebClient.create();
-        objectNode = webClient.post()
+        return webClient.post()
                 .uri("http://cardnetwork:8080/payment")
                 .bodyValue(objectNode)
                 .retrieve()
                 .bodyToMono(ObjectNode.class)
                 .block();
-        return objectNode;
     }
     public ObjectNode authorizeCardNetwork(ObjectNode objectNode){
         WebClient webClient = WebClient.create();
-        objectNode = webClient.post()
+        return webClient.post()
                 .uri("http://cardnetwork:8080/authorize")
                 .bodyValue(objectNode)
                 .retrieve()
                 .bodyToMono(ObjectNode.class)
                 .block();
-        return objectNode;
     }
 }
